@@ -172,7 +172,7 @@ def get_captures(cam):
         cv2.waitKey(150)
         #Capturar imagen en escala de grises
         image = cam.capture()
-        name = f"grano_esmaltado_I{i}"
+        name = f"defecto_crudo_I{i}"
         cam.save_capture(name)
         i+=1
 
@@ -205,13 +205,13 @@ def main():
         amp , display = amplitud_map(I1, I2, I3, I4, I5)
 
         #Guardar mapa de amplitud
-        name_amp= f"amplitud_grano_esmaltado"
+        name_amp= f"amplitud_defecto_crudo"
         cam.save_capture(name_amp, display)
             
         #Compensación de la fase lineal acoplada en phi_masked por la el patrón propagada
         phi_compensated = phi_compensate(phi)
         #Enmascaramos la fase con el mapa de amplitud
-        phi_masked , mask = mask_phase(phi_compensated, amp, 3.5, 50)
+        phi_masked , mask = mask_phase(phi_compensated, amp, 4, 60)
         #Desenvolvemos la fase previamente enmascarada
         #Se hace uso de unwrap_phase de skimage para desenvolver la fase
         phase_unwrapped= unwrap_phase(phi_masked)
@@ -231,7 +231,7 @@ def main():
         
         cv2.imshow(f"Fase desenvuelta", phi_unwrapped_display)
         #Guardamos la fase
-        name_phase = f"fase_grano_esmaltado"
+        name_phase = f"fase_defecto_crudo"
         cam.save_capture(name_phase, phi_unwrapped_display)
 
 

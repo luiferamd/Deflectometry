@@ -89,7 +89,7 @@ class thorCam:
         #Se guardan los segundos para evitar que se sobreescriban imágenes en el mismo minuto
         timestamp = time.strftime("%H%M%S")
         filename = f"{name}_{timestamp}.tiff"
-        full_path = os.path.join(self.save_path, filename)
+        full_path = os.path.join(save_folder, filename)
         success = cv2.imwrite(full_path, image)
     
         if not success:
